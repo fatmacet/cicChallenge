@@ -16,10 +16,17 @@ public class FilmLocationService {
         this.filmLocationRepository = filmLocationRepository;
     }
 
-    public Page<FilmLocation> getAllLocations(){
+    public Page<FilmLocation> getAllFilmLocations(){
         Pageable pageable = new PageRequest(0, 1000);
 
         return filmLocationRepository.findAll(pageable);
+    }
+
+    public Page<FilmLocation> getFilmLocationsByLocation(String location, Pageable pageable){
+
+        String upperCaseLocation = '*' + location.toUpperCase() + '*';
+
+        return filmLocationRepository.findByLocation(location, pageable);
     }
 
 }
