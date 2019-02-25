@@ -1,0 +1,19 @@
+<mat-card>
+  <form #locationForm="ngForm" (ngSubmit)="save(locationForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{location.location ? 'Edit' : 'Add'}} Location</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="href" [(ngModel)]="location.href">
+      <mat-form-field>
+        <input matInput placeholder="Location Name" [(ngModel)]="location.location"
+               required name="location" #location>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!locationForm.form.valid">Save</button>
+      <a mat-button routerLink="/location-list">Cancel</a>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -29,4 +29,7 @@ public class FilmLocationService {
         return filmLocationRepository.findByLocation(location, pageable);
     }
 
+    public FilmLocation getById(Long id) {
+        return filmLocationRepository.findById(id).get();
+    }
 }

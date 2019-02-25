@@ -5,9 +5,7 @@ import cic.challenge.com.service.FilmLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,6 +21,12 @@ public class FilmLocationsRestController {
     @RequestMapping("/locations")
     public Page<FilmLocation> getLocations() {
         return locationService.getAllFilmLocations();
+    }
+
+    @RequestMapping(value="/locations/{id}", method = RequestMethod.GET)
+    public FilmLocation getLocation(@PathVariable Long id) {
+
+        return locationService.getById(id);
     }
 
     @RequestMapping("/locationSearch")
