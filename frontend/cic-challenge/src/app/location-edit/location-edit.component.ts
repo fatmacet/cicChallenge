@@ -42,8 +42,8 @@ export class LocationEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['/locations-list']);
   }
 
-  save(form: NgForm) {
-    this.locationService.save(form).subscribe(result => {
+  save() {
+    this.locationService.save(this.location).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }

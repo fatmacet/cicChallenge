@@ -5,6 +5,7 @@ import cic.challenge.com.service.FilmLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,13 +26,19 @@ public class FilmLocationsRestController {
 
     @RequestMapping(value="/locations/{id}", method = RequestMethod.GET)
     public FilmLocation getLocation(@PathVariable Long id) {
-
         return locationService.getById(id);
     }
 
-    @RequestMapping("/locationSearch")
-    public Page<FilmLocation> getLocations(String location, Pageable pageable) {
+    @RequestMapping("/locations/search")
+    public Page<FilmLocation> getLocations(@RequestParam("location") String location, Pageable pageable) {
         return locationService.getFilmLocationsByLocation(location, pageable);
+    }
+
+    @PutMapping("/locations/{id}")
+    public ResponseEntity<?> saveResource(@RequestBody FilmLocation filmLocation,
+                                          @PathVariable("id") String id) {
+        locationService.save(filmLocation);
+        return ResponseEntity.ok(filmLocation);
     }
 
 }

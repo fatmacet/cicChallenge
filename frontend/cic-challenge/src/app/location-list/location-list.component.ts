@@ -9,11 +9,20 @@ import { FilmLocationService } from '../service/filmLocation/film-location.servi
 export class LocationListComponent implements OnInit {
 
   locations: Array<any>;
+  searchText: any = '';
 
   constructor(private filmLocationService: FilmLocationService) { }
 
   ngOnInit() {
     this.filmLocationService.getAll().subscribe(data => {
+      this.locations = data.content;
+    });
+  }
+
+
+
+  search(){
+    this.filmLocationService.search(this.searchText).subscribe(data => {
       this.locations = data.content;
     });
   }

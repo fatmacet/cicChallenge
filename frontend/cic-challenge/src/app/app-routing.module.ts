@@ -10,10 +10,6 @@ const routes: Routes = [
     component: LocationListComponent
   },
   {
-    path: 'location-add',
-    component: LocationEditComponent
-  },
-  {
     path: 'location-edit/:id',
     component: LocationEditComponent
   }

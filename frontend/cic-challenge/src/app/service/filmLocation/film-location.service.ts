@@ -7,26 +7,27 @@ import { Observable } from 'rxjs';
 })
 export class FilmLocationService {
 
-  public API = '//localhost:8080';
-  public LOCATION_API = this.API + '/locations';
+  public API = '//localhost:8080/locations';
 
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get('//localhost:8080/locations');
+    return this.http.get(this.API);
+  }
+
+  search(searchText: string): Observable<any> {
+    return this.http.get(this.API + '/search?location=' + searchText + '&size=1000' + '&page=0');
   }
 
   get(id: string) {
-    return this.http.get(this.LOCATION_API + '/' + id);
+    return this.http.get(this.API + '/' + id);
   }
 
   save(location: any): Observable<any> {
     let result: Observable<Object>;
-    if (location['href']) {
-      result = this.http.put(location.href, location);
-    } else {
-      result = this.http.post(this.LOCATION_API, location);
-    }
+   
+      result = this.http.put(this.API + '/' + location.id, location);
+   
     return result;
   }
 }
